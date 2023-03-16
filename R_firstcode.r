@@ -4,43 +4,48 @@ install.packages("raster")
 
 library(raster)
 
-Settiamo in R la cartella nella quale lavoreremo Working directory
+#Setting Working directory (folder Lab) in Microsoft
 setwd("C:/Lab/")
-#Parakana Indigenous Reserve, ultimo appezzamento rimasto di una porzione più grande della Forseta Amazzonica (Prov. di Belem)
-#Dati satellitari Landsat 8, con path 224 row 63
+
+#Parakanã Indigenous Reserve, last portion of Amazon Forest in near Belem (Paranà State,Brasil)
+#Landsat 8 data, path 224 row 63
 l2011<-brick("p224r63_2011_masked.grd")
-#cambiamo colore con colorRampPalette
+#changing plot color w/ colorRampPalette
 cl <- colorRampPalette(c("cadetblue1", "darkblue", "darkred")) (100)
 plot(l2011, col=cl)
 
-# b1 = blu
-# b2 = verde
-# b3 = rosso
-# b4 = infrarosso vicino NIR
-#plottiamo solo banda blu
+#Landast imagine made by 7 different layer in a single photo, one for each color:
+# b1 = blue
+# b2 = green
+# b3 = red
+# b4 = NIR
+#plotting just blue layer
 plot(l2011$B1_sre)
-#plottiamo solo la banda del NIR
+#plottiamo just NIR layer 
 plot(l2011$B4_sre)
 #or
 plot(l2011[[4]])
-#chiudere plot 
+#closing plot 
 dev.off()
-#per esportare grafici da R
-pdf("first_graph.pdf")
-#plottiamo immagine da esportare
-plot(l2011$B4_sre)
-#chiudiamo plot
-dev.off()
-#multiframe più parti nello stesso blocco (qui in immagine con due bande)
-#distribuisco parti per righe/colonne
+
+#exporting chart from R
+#1° step
+pdf("first_graph.pdf") #naming file, her in pdf form. W/ working directory is saved directly in the selected folder (here "Lab")
+#2° step
+plot(l2011$B4_sre) #selecting the plot, here only NIR photo
+#3° step
+dev.off() #closing every open plot
+
+# plotting specific layer in the block w/ function |par(mf)|
+#setting row & column (n° row, n° column), c for binding 
 par(mfrow=c(2,1))
-#poi inserisco le immagini da plottare
+#selecting the images
 plot(l2011$B3_sre)
 plot(l2011$B4_sre)
-#plottiamo le prime 4 bande, un colore layer
-#blu
-clb <- colorRampPalette(c("blue4", "blue2", "light blue")) (100)
-plot(l2011$B1_sre, col=clb)
+#plotting the first 4 layer, 1 color for each image
+#blue
+clb <- colorRampPalette(c("blue4", "blue2", "light blue")) (100) #naming plot, choosing colors
+plot(l2011$B1_sre, col=clb) #plotting 
 
 clg <- colorRampPalette(c("chartreuse4", "chartreuse2", "chartreuse")) (100)
 plot(l2011$B2_sre, col=clg)
