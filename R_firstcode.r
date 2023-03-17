@@ -3,7 +3,6 @@
 install.packages("raster")
 
 library(raster)
-
 #Setting Working directory (folder Lab) in Microsoft
 setwd("C:/Lab/")
 
@@ -30,7 +29,7 @@ dev.off()
 
 #exporting chart from R
 #1° step
-pdf("first_graph.pdf") #naming file, her in pdf form. W/ working directory is saved directly in the selected folder (here "Lab")
+pdf("first_graph.pdf") #naming file, here in pdf form. W/ working directory is saved directly in the selected folder (here "Lab")
 #2° step
 plot(l2011$B4_sre) #selecting the plot, here only NIR photo
 #3° step
@@ -46,13 +45,13 @@ plot(l2011$B4_sre)
 #blue
 clb <- colorRampPalette(c("blue4", "blue2", "light blue")) (100) #naming plot, choosing colors
 plot(l2011$B1_sre, col=clb) #plotting 
-
+#green
 clg <- colorRampPalette(c("chartreuse4", "chartreuse2", "chartreuse")) (100)
 plot(l2011$B2_sre, col=clg)
-
+#red
 clr <- colorRampPalette(c("brown1", "coral2", "coral4")) (100)
 plot(l2011$B3_sre, col=clr)
-
+#near infrared 
 clin <- colorRampPalette(c("chocolate1", "darkgoldenrod2", "darkgoldenrod4")) (100)
 plot(l2011$B3_sre, col=clin)
 
