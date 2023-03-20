@@ -14,10 +14,10 @@ cl <- colorRampPalette(c("cadetblue1", "darkblue", "darkred")) (100)
 plot(l2011, col=cl)
 
 #Landast imagine made by 7 different bands in a single image, one for each color:
-# b1 = blue
-# b2 = green
-# b3 = red
-# b4 = NIR
+# 1 = blue
+# 2 = green
+# 3 = red
+# 4 = NIR
 #plotting just blue layer
 plot(l2011$B1_sre)
 #plotting just NIR layer 
