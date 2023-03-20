@@ -1,0 +1,14 @@
+library(raster)
+setwd("C:/Lab/")
+l2011<-brick("p224r63_2011_masked.grd")
+
+cl <- colorRampPalette(c("cadetblue1", "darkblue", "darkred")) (100)
+plot(l2011, col=cl)
+
+pdf("first_graph.pdf")
+plot(l2011$B4_sre)
+dev.off()
+
+par(mfrow=c(2,1))
+plot(l2011$B3_sre)
+plot(l2011$B4_sre)
