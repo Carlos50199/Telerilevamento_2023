@@ -13,23 +13,23 @@ l2011<-brick("p224r63_2011_masked.grd")
 cl <- colorRampPalette(c("cadetblue1", "darkblue", "darkred")) (100)
 plot(l2011, col=cl)
 
-#Landast imagine made by 7 different layer in a single photo, one for each color:
+#Landast imagine made by 7 different bands in a single image, one for each color:
 # b1 = blue
 # b2 = green
 # b3 = red
 # b4 = NIR
 #plotting just blue layer
 plot(l2011$B1_sre)
-#plottiamo just NIR layer 
-plot(l2011$B4_sre)
-#or
+#plotting just NIR layer 
+plot(l2011$B4_sre) 
+#or 
 plot(l2011[[4]])
 #closing plot 
 dev.off()
 
 #exporting chart from R
 #1° step
-pdf("first_graph.pdf") #naming file, here in pdf form. W/ working directory is saved directly in the selected folder (here "Lab")
+pdf("first_graph.pdf") #naming file, pdf or png form. W/ working directory is saved directly in the selected folder (here "Lab")
 #2° step
 plot(l2011$B4_sre) #selecting the plot, here only NIR photo
 #3° step
@@ -55,38 +55,18 @@ plot(l2011$B3_sre, col=clr)
 clin <- colorRampPalette(c("chocolate1", "darkgoldenrod2", "darkgoldenrod4")) (100)
 plot(l2011$B3_sre, col=clin)
 
-library(raster)
-setwd("C:/Lab/")
-l2011<-brick("p224r63_2011_masked.grd")
-l2011
-plotRGB(l2011,r=3,g=2,b=1, strech="lin")
-#serve stretch
-plotRGB(l2011, r=3, g=2, b=3, stretch="Lin")
-plotRGB(l2011, r=3, g=2, b=3, stretch="lin")
-plotRGB(l2011, r=3, g=2, b=3, stretch="lin")
-plotRGB(l2011,r=4,g=3,b=2, stretch="lin")
-plotRGB(l2011,r=3,g=4,b=2, stretch="lin")
+#Creating an RGB image, letters r/g/b linked w/ desidered band
+# b1 = blue
+# b2 = green
+# b3 = red
+# b4 = NIR
+#stretch=increase the contrast of the image, can be [="lin"] or [="hist"]
+plotRGB(l2011,r=3,g=2,b=1, stretch="lin") #image w/ every layer with the right letter and linear stretch
+#r=red; g=green; b=blue
+plotRGB(l2011,r=3,g=2,b=1,) # same image as before without stretch
+plotRGB(l2011, r=3, g=2, b=3, stretch="Lin") #highlight plants
+plotRGB(l2011,r=4,g=3,b=2, stretch="lin") #plants highlighted in red
+plotRGB(l2011,r=3,g=4,b=2, stretch="lin") #plants highlighted in green, fields in purple
 #plotRGB(l2011, r=3, g=2, b=3, stretch="lin") ora tutte le piante diventanno verde
-plotRGB(l2011,r=3, g=2, b=4, stretch="lin") #ora suolo nudo in giallo
-#ora PAR con immagine originale sopra e quella in falso colore sotto(usando NIR)
-par(mfrow=c(2,1))
-plotRGB(l2011,r=3,g=2,b=1, strech="lin")
-plotRGB(l2011,r=3,g=2,b=1, strech="lin")
-dev.off()
-par(mfrow=c(2,1))
-plotRGB(l2011,r=3,g=2,b=1, strech="lin")
-dev.off()
-par(mfrow=c(2,1))
-plotRGB(l2011,r=3,g=2,b=1, stretch="lin")
-plotRGB(l2011,r=3,g=4,b=2, stretch="lin")
-plotRGB(l2011,r=4,g=3,b=2, stretch="hist")
-plotRGB(l2011,r=1,g=2,b=3, stretch="hist")
-dev.off()
-par(mfrow=c(2,1))
-plotRGB(l2011,r=4,g=3,b=2, stretch="lin")
-plotRGB(l2011,r=4,g=3,b=2, stretch="hist")
-pdf("stretch_1.pdf")
-par(mfrow=c(2,1))
-plotRGB(l2011,r=4,g=3,b=2, stretch="lin")
-plotRGB(l2011,r=4,g=3,b=2, stretch="hist")
-dev.off()
+plotRGB(l2011,r=3, g=2, b=4, stretch="lin") #plants in blue, bare ground (probably fields) in yellow
+
