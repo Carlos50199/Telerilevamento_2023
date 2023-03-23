@@ -13,7 +13,7 @@ l2011<-brick("p224r63_2011_masked.grd")
 cl <- colorRampPalette(c("cadetblue1", "darkblue", "darkred")) (100)
 plot(l2011, col=cl)
 
-#Landast imagine made by 7 different bands in a single image, one for each color:
+#Landast images made by 7 different bands in a single image, one for each color:
 # 1 = blue
 # 2 = green
 # 3 = red
@@ -61,12 +61,37 @@ plot(l2011$B3_sre, col=clin)
 # b3 = red
 # b4 = NIR
 #stretch=increase the contrast of the image, can be [="lin"] or [="hist"]
+#[lin] scala valori linearmente 
+#[hist] amplifica valori estremi
 plotRGB(l2011,r=3,g=2,b=1, stretch="lin") #image w/ every layer with the right letter and linear stretch
 #r=red; g=green; b=blue
 plotRGB(l2011,r=3,g=2,b=1,) # same image as before without stretch
 plotRGB(l2011, r=3, g=2, b=3, stretch="Lin") #highlight plants
 plotRGB(l2011,r=4,g=3,b=2, stretch="lin") #plants highlighted in red
 plotRGB(l2011,r=3,g=4,b=2, stretch="lin") #plants highlighted in green, fields in purple
-#plotRGB(l2011, r=3, g=2, b=3, stretch="lin") ora tutte le piante diventanno verde
-plotRGB(l2011,r=3, g=2, b=4, stretch="lin") #plants in blue, bare ground (probably fields) in yellow
+plotRGB(l2011, r=3, g=2, b=3, stretch="lin") #ora tutte le piante diventanno verde
+plotRGB(l2011,r=3, g=2, b=4, stretch="lin") #plants in blue, bare ground (probably fields) in yellow#
+
+#importing 1988 Landsat images
+l1988<-brick("p224r63_1988_masked.grd")
+#creating multiframe w/ 2011 RGB image and 1988 RGB image (natural color) |par(mf)|
+par(mfrow=c(2;1))
+plotRGB(l2011, r=3, g=2, b=3, stretch="Lin")
+plotRGB(l1988, r=3, g=2, b=3, stretch="Lin")
+#creating multiframe w/ 2011 RGB image and 1988 RGB image, both linear and histographic stretch
+par(mfrow=c(2,2))
+> plotRGB(l1988,r=4,g=3,b=2, stretch="lin")
+> plotRGB(l2011,r=4,g=3,b=2, stretch="lin")
+> plotRGB(l1988,r=4,g=3,b=2, stretch="hist")
+> plotRGB(l2011,r=4,g=3,b=2, stretch="hist")
+#now save as pdf 
+pdf("1988_vs_2011_Lin_Hist.pdf")
+par(mfrow=c(2,2))
+plotRGB(l1988,r=4,g=3,b=2, stretch="lin")
+plotRGB(l2011,r=4,g=3,b=2, stretch="lin")
+plotRGB(l1988,r=4,g=3,b=2, stretch="hist")
+plotRGB(l2011,r=4,g=3,b=2, stretch="hist")
+dev.off()
+
+#indici di uso del suolo tramite indice di vegetazione legato alla differenza tra red e NIR
 
