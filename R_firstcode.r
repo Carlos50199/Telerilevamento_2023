@@ -98,13 +98,12 @@ dev.off()
 #just copying
 library(raster)
 
-setwd("~/lab/") # Linux
-# setwd("C:/lab/") # Windows
-# setwd("/Users/name/Desktop/lab/") # Mac
+setwd("C:/lab/") # Windows
 
-# Exercise: import the first file -> defor1_.jpg -> give it the name l1992
+
+# Exercise: import the first image (defor1_.png) named l1992
 l1992 <- brick("defor1_.png")
-
+#plotting l1992
 plotRGB(l1992, r=1, g=2, b=3, stretch="lin")
 
 # layer 1 = NIR
@@ -112,7 +111,7 @@ plotRGB(l1992, r=1, g=2, b=3, stretch="lin")
 # layer 3 = green
 
 
-# Exercise: import the second file -> defor2_.jpg -> give it the name l2006
+# Exercise: import the second image (defor2_.png) named l2006
 l2006 <- brick("defor2_.png")
 
 # l2006 <- brick("p224r63_2011.grd")
