@@ -209,3 +209,4 @@ Warning message:
 In ndvi1992 - ndvi2006 :
   Raster objects have different extents. Result for their intersection is returned
 > plot(dif_ndvi, col)
+
