@@ -113,6 +113,7 @@ plotRGB(l1992, r=1, g=2, b=3, stretch="lin")
 
 # Exercise: import the second image (defor2_.png) named l2006
 l2006 <- brick("defor2_.png")
+#warning message because no coordinates are present
 
 # l2006 <- brick("p224r63_2011.grd")
 l2006
@@ -140,18 +141,20 @@ dvi2006
 plot(dvi2006, col=cl)
 
 
-# DVI difference in time
+# DVI difference in time 
 dvi_dif = dvi1992 - dvi2006
-cld <- colorRampPalette(c('blue','white','red'))(100)
-plot(dvi_dif, col=cld)
+crp_time.diff <- colorRampPalette(c('blue','white','red'))(100)
+plot(dvi_dif, col=crp_time.diff)
 
 #- day 2
 
 # Range DVI (8 bit): -255 a 255
-# Range NDVI (8 bit): -1 a 1
+# Range NDVI (8 bit): -1 a 1 , (NIR_RED)/(NIR+RED)
+#n° BIT= radiometric resolution 
 
 # Range DVI (16 bit): -65535 a 65535
 # Range NDVI (16 bit): -1 a 1
+#Normalized Difference Vegetation Index
 
 # Hence, NDVI can be used to compare images with a different radiometric resolution
 
@@ -159,7 +162,7 @@ plot(dvi_dif, col=cld)
 dvi1992 = l1992[[1]] - l1992[[2]]
 ndvi1992 = dvi1992 / (l1992[[1]] + l1992[[2]])
 # or
-ndvi1992 = (l1992[[1]] - l1992[[2]]) / (l1992[[1]] + l1992[[2]])
+ndvi1992 = (l1992[[1]] - l1992[[2]]) / (l1992[[1]] + l1992[[2]]) #(NIR_RED)/(NIR+RED) should be standardization, but is called normalization
 
 cl <- colorRampPalette(c('darkblue','yellow','red','black'))(100) # specifying a color scheme
 plot(ndvi1992, col=cl)
@@ -179,3 +182,30 @@ ndvi2006 = dvi2006 / (l2006[[1]] + l2006[[2]])
 par(mfrow=c(2,1))
 plot(ndvi1992, col=cl)
 plot(ndvi2006, col=cl)
+
+
+1 mese 25,99
+6 mesi 13,33
+12 mesi8,74 
+> ndvi1992 = (l1992[[1]] - l1992[[2]]) / (l1992[[1]] + l1992[[2]])
+Warning messages:
+1: [rast] unknown extent 
+2: [rast] unknown extent 
+3: [rast] unknown extent 
+4: [rast] unknown extent 
+> plot(ndvi1992, col())
+Error in h(simpleError(msg, call)) : 
+  errore durante la valutazione dell'argomento 'y' nella selezione di un metodo per la funzione 'plot': argument "x" is missing, with no default
+> plot(ndvi1992, col)
+> ndvi2006 = (l2006[[1]] - l2006[[2]]) / (l2006[[1]] + l2006[[2]])
+Warning messages:
+1: [rast] unknown extent 
+2: [rast] unknown extent 
+3: [rast] unknown extent 
+4: [rast] unknown extent 
+> plot(ndvi2006, col)
+> dif_ndvi=ndvi1992-ndvi2006
+Warning message:
+In ndvi1992 - ndvi2006 :
+  Raster objects have different extents. Result for their intersection is returned
+> plot(dif_ndvi, col)
