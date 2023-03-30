@@ -1,0 +1,11 @@
+#working with land temperature from Copernicus server
+#creating new folder |Greenland| in C:Lab
+#4 pics representing single band
+#importing single layer w/ rster function
+lst_200<-raster("lst_2000.tif")
+#to check every file imported
+ls() #=list
+#to create list 
+list.files(pattern="single name for all the pics")
+#to apply raster function to the list
+import<-lapply(rlist,raster)
