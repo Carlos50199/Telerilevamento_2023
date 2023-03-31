@@ -1,0 +1,28 @@
+install.packages("raster")
+install.packages("rasterVis")
+library(raster)
+library(rasterVis)
+library(rgdal)
+setwd("C:/Lab/Greenland")
+
+#importinng 4 pics, each is a single layer
+lst_2000 <- raster("lst_2000.tif")
+lst_2005 <- raster("lst_2005.tif")
+lst_2010 <- raster("lst_2010.tif")
+lst_2015 <- raster("lst_2015.tif")
+
+#plotting all images together
+par(mfrow=c(2,2))
+plot(lst_2000)
+plot(lst_2005)
+plot(lst_2010)
+plot(lst_2015)
+
+#listing the pics
+rlist <- list.files(pattern="lst")
+#/w "pattern=" we set the quality that every file/pic has in common in the name, here "lst"
+
+#importing(?) the listed files all together
+import <- lapply(rlist,raster)
+
+
