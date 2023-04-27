@@ -25,4 +25,47 @@ rlist <- list.files(pattern="lst")
 #importing(?) the listed files all together
 import <- lapply(rlist,raster)
 
+#classifing images by classes
+ #here 2 classes: class1=forest, class2=bare soil
+ #first get the single values of the pic
+ singlenr1 <- getValues(defor1)
+ 
+#now we can classify, w/ centers= n° of classes desired
+ kcluster1 <- kmeans(singlenr1, centers = 2)
+ 
+ #now we need to recreate the image from the raw data extracted
+ defor1class <- setValues(defor1[[1]], kcluster1$cluster)
 
+#calculating classes' frequencies in pixel(?)
+#for defor1
+frequencies1<-freq(defor1class)
+     value  count
+[1,]     1 306297
+[2,]     2  34995
+
+#for defor2
+frequiencies2<-freq(defor2class)
+     value  count
+[1,]     1 164270
+[2,]     2 178456
+
+#calculating total 
+tot1<-ncell(defor1class)
+tot2<-ncell(defor2class)
+
+#calculating percentages
+percentages1<-frequencies1*100/ tot1
+percentages2<-frequencies2*100/ tot2
+
+#comparing the percentages w/ data frame
+cover<- c("Forest","Bare soil")
+percent1992.1<-c(89.75, 10.25)  #defor1 pic is 1992
+percent2006.2<-c(52.07, 47.93)  #defor2 pic is 2006
+
+#now the data frame
+percentages<- data.frame(cover,percent1992.1, percent2006.2)
+
+#here the results
+      cover percent1992.1 percent2006.2
+1    Forest         89.75         52.07
+2 Bare soil         10.25         47.93
