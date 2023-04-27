@@ -1,0 +1,50 @@
+> library(raster)
+Caricamento del pacchetto richiesto: sp
+Warning messages:
+1: il pacchetto ‘raster’ è stato creato con R versione 4.2.2 
+2: il pacchetto ‘sp’ è stato creato con R versione 4.2.2 
+> library(ggplot2)
+Warning message:
+il pacchetto ‘ggplot2’ è stato creato con R versione 4.2.3 
+> setwd("C:/Lab/")
+> 
+> cover <- c("Forest","Bare soil")
+> percent1992 <- c(89.75, 10.25)
+> percent2006 <- c(52.07, 47.93)
+> 
+> percentages <- data.frame(cover, percent1992, percent2006)
+> 
+> ggplot(percentages, aes(x=cover, y=percent1992, color=cover)) +
++     geom_bar(stat="identity", fill="white")
+> 
+> ggplot(percentages, aes(x=cover, y=percent2006, color=cover)) +
++     geom_bar(stat="identity", fill="white")
+> 
+> p1 <- ggplot(percentages, aes(x=cover, y=percent1992, color=cover)) +
++     geom_bar(stat="identity", fill="white") +
++     ggtitle("Year 1992")
+> p2 <- ggplot(percentages, aes(x=cover, y=percent2006, color=cover)) +
++     geom_bar(stat="identity", fill="white") + 
++     ggtitle("Year 2006")
+> 
+> p1 + p2
+Error in `ggplot_add()`:
+! Can't add `p2` to a <ggplot> object.
+Run `rlang::last_error()` to see where the error occurred.
+> 
+> p1 <- ggplot(percentages, aes(x=cover, y=percent1992, color=cover)) +  geom_bar(stat="identity", fill="white") + ggtitle("Year 1992") + ylim(c(0,100))
+> p2 <- ggplot(percentages, aes(x=cover, y=percent2006, color=cover)) + geom_bar(stat="identity", fill="white") +  ggtitle("Year 2006") + ylim(c(0,100))
+> p1 + p2
+Error in `ggplot_add()`:
+! Can't add `p2` to a <ggplot> object.
+Run `rlang::last_error()` to see where the error occurred.
+> rlang::last_error()
+<error/rlang_error>
+Error in `ggplot_add()`:
+! Can't add `p2` to a <ggplot> object.
+---
+Backtrace:
+ 1. ggplot2:::`+.gg`(p1, p2)
+ 2. ggplot2:::add_ggplot(e1, e2, e2name)
+ 4. ggplot2:::ggplot_add.default(object, p, objectname)
+Run `rlang::last_trace()` to see the full context.
