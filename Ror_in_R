@@ -48,3 +48,59 @@ Backtrace:
  2. ggplot2:::add_ggplot(e1, e2, e2name)
  4. ggplot2:::ggplot_add.default(object, p, objectname)
 Run `rlang::last_trace()` to see the full context.
+
+ setwd("C:/Lab/")
+> library(raster)
+Caricamento del pacchetto richiesto: sp
+Warning messages:
+1: il pacchetto ‘raster’ è stato creato con R versione 4.2.2 
+2: il pacchetto ‘sp’ è stato creato con R versione 4.2.2 
+> library(ggplot2)
+Warning message:
+il pacchetto ‘ggplot2’ è stato creato con R versione 4.2.3 
+> library(patchwork)
+
+Caricamento pacchetto: ‘patchwork’
+
+Il seguente oggetto è mascherato da ‘package:raster’:
+
+    area
+
+Warning message:
+il pacchetto ‘patchwork’ è stato creato con R versione 4.2.3 
+> library(viridis)
+Caricamento del pacchetto richiesto: viridisLite
+Warning message:
+il pacchetto ‘viridis’ è stato creato con R versione 4.2.2 
+> #R_code variability
+> sen<-brick("Similaun.png")
+Warning message:
+[rast] unknown extent 
+> sen
+class      : RasterBrick 
+dimensions : 794, 798, 633612, 4  (nrow, ncol, ncell, nlayers)
+resolution : 1, 1  (x, y)
+extent     : 0, 798, 0, 794  (xmin, xmax, ymin, ymax)
+crs        : NA 
+source     : Similaun.png 
+names      : Similaun_1, Similaun_2, Similaun_3, Similaun_4 
+
+> #4° layer just control layer
+> plotRGB(sen, 1, 2, 3, stretch="lin")
+Warning messages:
+1: [rast] unknown extent 
+2: [rast] unknown extent 
+3: [rast] unknown extent 
+> #vegetation is in red, prateria di alta quota e foreste
+> #studiamo variabilità dell'immagine
+> #variabilità calcolata in rapporto alla singola banda
+> NIR<- sen[[1]]
+> mean3<-focal(NIR, matrix(1/9, 3, 3)fun=mean)
+Error: unexpected symbol in "mean3<-focal(NIR, matrix(1/9, 3, 3)fun"
+> mean_3<-focal(NIR, matrix(1/9, 3, 3) fun=mean)
+Error: unexpected symbol in "mean_3<-focal(NIR, matrix(1/9, 3, 3) fun"
+> mean_3<-focal(NIR, matrix(1/9, 3, 3) fun="mean")
+Error: unexpected symbol in "mean_3<-focal(NIR, matrix(1/9, 3, 3) fun"
+> sd3<-focal(NIR, matrix (1/9, 3, 3) fun= mean)
+Error: unexpected symbol in "sd3<-focal(NIR, matrix (1/9, 3, 3) fun"
+> 
